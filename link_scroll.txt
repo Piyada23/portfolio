@@ -1,0 +1,10 @@
+https://github.com/Nolanus/ng2-page-scroll
+https://github.com/MarcinMichalik/ng-scrollTo#readme
+https://ng2-ui.github.io/dist/#/scrollable
+
+
+https://github.com/JonnyBGod/ngx-scrollspy
+https://github.com/bergben/ng2-scrollimate
+
+
+https://github.com/JonnyBGod/ngx-scrollspy/issues/170#issuecomment-296048937
