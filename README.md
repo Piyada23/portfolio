@@ -346,7 +346,7 @@ AIS 4G Board เป็นบอร์ดที่รวมไมโครคอ�
       event.Payload  | TYPE JSON 
       event.RESP  | String message response “SUCCESS” or “FAIL”
       event.CODE | success code such ass 20000 or 40400 etc
-      #### Example
+      #### Example Code
       ```cpp
       void setup() 
       {
@@ -363,8 +363,12 @@ AIS 4G Board เป็นบอร์ดที่รวมไมโครคอ�
       ```
 
  * #### other   
-   * `magel.s`    สำหรับ 
-   * `magel.s`    สำหรับ 
+     เป็นคำสั่งที่จะเขียนในส่วนของฟังก์ชัน void loop() โดยจะเป็นคำสั่งที่ช่วยให้การเขียนโปรแกรมง่ายขึ้นซึ่งได้จัดทำคำสั่งต่าง ๆ ดังนี้
+     
+   * `magel.subscribes([]() { function register subscribe here });`    ใช้สำหรับสร้างเป็น group callback function สำหรับ subscribe ตามที่ต้องการ โดยสามารถใส่ function ลงใน function magel.subscribes จากนั้นโปรแกรมจะทำการ subscribes ให้อัตโนมัติ หากว่าอุปกรณ์ขาดการเชื่อมต่อไป  
+   * `magel.interval(unsigned int millis, []() { function here });`    ใช้ในการกำหนดช่วงเวลาในการส่งข้อมูลแต่ละรอบ 
+
+
 **remark:** 
  * คำสั่ง `magel.begin();` และ `magel.centric.begin();`   ผู้ใช้งานต้องเลือกใช้คำสั่งใดคำสั่งหนึ่ง
  * ชุดข้อมูลของ Sensor ที่ถูก add ไว้จะถูก Clear ทันทีเมื่อมีการ Report ค่าขึ่น Magellan
@@ -434,7 +438,31 @@ AIS 4G Board เป็นบอร์ดที่รวมไมโครคอ�
    * `WiFi`
      * [IoT_Hub_sample](examples/Azure_IoT/WiFi/IoT_Hub_sample/IoT_Hub_sample.ino) - ตัวอย่างการอ่านค่าอุณหภูมิและความชื้นส่งค่าขึ้น Azure IoT Hub ผ่าน WiFi (ESP32)
      * [IoT_Central_sample](examples/Azure_IoT/WiFi/IoT_Central_sample/IoT_Central_sample.ino) - ตัวอย่างการอ่านค่าอุณหภูมิและความชื้นส่งค่าขึ้น Azure IoT Central ผ่าน WiFi (ESP32)
-  
+ * `Magellan IoT MQTT` 
+   * `getServerConfig`
+     * [getServerConfigJSON](examples/Azure_IoT/4G/IoT_Hub_sample/IoT_Hub_sample.ino) - ตัวอย่างการแสดงค่าที่อุปกรณ์ไปเรียกค่าที่เราทำการ Config ไว้บน Magellan IoT Platform ในรูปแบบ JSON 
+     * [getServerConfigPlaintext](examples/Azure_IoT/4G/IoT_Central_sample/IoT_Central_sample.ino) - ตัวอย่างการแสดงค่าที่อุปกรณ์ไปเรียกค่าที่เราทำการ Config ไว้บน Magellan IoT Platform ในรูปแบบ PLAINTEXT 
+   * `getControl`
+     * [getControlJSON](examples/Azure_IoT/4G/IoT_Hub_sample/IoT_Hub_sample.ino) - ตัวอย่างการแสดงค่าที่ตัวอุปกรณ์ทำการ Control บน Dashboard ของ Magellan IoT Platform ในรูปแบบ JSON 
+     * [getControlPlaintext](examples/Azure_IoT/4G/IoT_Central_sample/IoT_Central_sample.ino) - ตัวอย่างการแสดงค่าที่ตัวอุปกรณ์ทำการ Control บน Dashboard ของ Magellan IoT Platform ในรูปแบบ PLAINTEXT 
+   * `getControlLED`
+     * [getControlJSON_LED](examples/Azure_IoT/4G/IoT_Hub_sample/IoT_Hub_sample.ino) - ตัวอย่างการแสดงค่าที่ตัวอุปกรณ์ทำการ Control LED บน Dashboard ของ Magellan IoT Platform ในรูปแบบ JSON 
+     * [getControlPlaintext_LED](examples/Azure_IoT/4G/IoT_Central_sample/IoT_Central_sample.ino) - ตัวอย่างการแสดงค่าที่ตัวอุปกรณ์ทำการ Control LED บน Dashboard ของ Magellan IoT Platform ในรูปแบบ PLAINTEXT 
+   * `heartbeat`
+     * [heartbeat](examples/Azure_IoT/4G/IoT_Hub_sample/IoT_Hub_sample.ino) - ตัวอย่างการส่งสัญญาณไปยัง Server รูปแบบ Heartbeat เพื่อบอกให้ Magellan IoT Platform รับรู้ว่าอุปกรณ์ดังกล่าวยังมีการเชื่อมต่ออยู่
+   * `reportData`
+     * [reportDataJSON](examples/Azure_IoT/4G/IoT_Hub_sample/IoT_Hub_sample.ino) - ตัวอย่างการส่งค่าตัวเลขแบบสุ่มขึ้นไปยัง Magellan IoT Platform ในรูปแบบ JSON 
+     * [reportDataPlaintext](examples/Azure_IoT/4G/IoT_Central_sample/IoT_Central_sample.ino) - ตัวอย่างการส่งค่าตัวเลขแบบสุ่มขึ้นไปยัง Magellan IoT Platform ในรูปแบบ PLAINTEXT 
+   * `reportMultiDataType`
+     * [reportMultiDataType](examples/Azure_IoT/4G/IoT_Hub_sample/IoT_Hub_sample.ino) - ตัวอย่างการส่งรายงานข้อมูลหลายประเภท โดยแสดงตัวอย่างการส่งข้อมูลในรูปแบบเลขจำนวนเต็มบวก, เลขจำนวนเต็มลบ, ทศนิยม, ข้อความ, พิกัด GPS และ Boolean
+   * `reportSensor`
+     * [reportSensorJSON](examples/Azure_IoT/4G/IoT_Hub_sample/IoT_Hub_sample.ino) - ตัวอย่างการส่งข้อมูลจาก sensor บนอุปกรณไปบน Magellan IoT Platform ในรูปแบบ JSON 
+     * [reportDataPlaintext](examples/Azure_IoT/4G/IoT_Central_sample/IoT_Central_sample.ino) - ตัวอย่างการส่งข้อมูลจาก sensor บนอุปกรณไปบน Magellan IoT Platform ในรูปแบบ PLAINTEXT 
+   * `reportUserButton`
+     * [reportUserButton](examples/Azure_IoT/4G/IoT_Hub_sample/IoT_Hub_sample.ino) - ตัวอย่างการใช้งานปุ่มกด (user button) บนอุปกรณ์ โดยจะมีการทำงานร่วมกับ Magellan Dashboard 
+   * `SaveClientConfig`
+     * [SaveClientConfig](examples/Azure_IoT/4G/IoT_Hub_sample/IoT_Hub_sample.ino) - ตัวอย่างการบันทึกค่า Client Config ของ Thing ขึ้นไปบน Magellan IoT Platform
+
 ### ไลบรารีแนะนำให้ใช้งานร่วมกัน
 
  * [ArduinoHttpClient](https://github.com/arduino-libraries/ArduinoHttpClient) - ไลบรารีเชื่อมต่อ HTTP/HTTPS
